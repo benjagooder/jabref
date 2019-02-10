@@ -1,9 +1,6 @@
 package org.jabref.gui;
 
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.jabref.gui.mergeentries.MergeEntries;
-import org.jabref.model.database.BibDatabaseMode;
 import org.jabref.model.entry.BibEntry;
 import org.junit.jupiter.api.Test;
 
@@ -12,33 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class DuplicateResolverDialogTest {
 
     @Test
-    void givenNewDuplicateResolverDialogAndEmptyParameters_whenInitializing_thenNoError() {
-        Stage stage = new Stage();
-        JabRefFrame frame = new JabRefFrame(stage);
-        BibEntry one = new BibEntry();
-        BibEntry two = new BibEntry();
-        DuplicateResolverDialog.DuplicateResolverType type = DuplicateResolverDialog.DuplicateResolverType.IMPORT_CHECK;
-
-        DuplicateResolverDialog sut = new DuplicateResolverDialog(frame, one, two, type);
-    }
-
-    @Test
     void givenUninitializedStage_whenInitializing_thenNoError() {
         Stage sut;
-
-    }
-
-    @Test
-    void givenInitializedStage_whenInitializing_thenNoError() {
-        Stage sut = new Stage(StageStyle.DECORATED);
-
-    }
-
-    @Test
-    void givenNewJabRefFrame_whenInitializing_thenNoError() {
-        Stage stage = new Stage();
-        JabRefFrame sut = new JabRefFrame(stage);
-
     }
 
     @Test
@@ -59,20 +31,4 @@ class DuplicateResolverDialogTest {
         assertEquals(DuplicateResolverDialog.DuplicateResolverResult.KEEP_LEFT,sut);
     }
 
-    @Test
-    public void givenDuplicateResolverDialog_whenGetMergedEntry_thenMergedBibEntryMeReturned(){
-        Stage stage = new Stage();
-        JabRefFrame frame = new JabRefFrame(stage);
-        BibEntry one = new BibEntry();
-        BibEntry two = new BibEntry();
-        DuplicateResolverDialog.DuplicateResolverType type = DuplicateResolverDialog.DuplicateResolverType.IMPORT_CHECK;
-
-        DuplicateResolverDialog testDialog = new DuplicateResolverDialog(frame, one, two, type);
-
-        BibEntry sut = testDialog.getMergedEntry();
-        BibDatabaseMode mode = BibDatabaseMode.BIBTEX;
-
-        MergeEntries ans = new MergeEntries(one, two, mode);
-        assertEquals(ans, sut);
-    }
 }
