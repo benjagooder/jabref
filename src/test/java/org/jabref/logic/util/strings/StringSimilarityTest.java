@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class StringSimilarityTest {
 
@@ -42,14 +41,6 @@ public class StringSimilarityTest {
         String a = "Fish";
         String b = "Bears";
         assertEquals(5.0, sut.editDistanceIgnoreCase(a,b));
-    }
-
-    @Test
-    public void givenVeryDifferentStrings_whenTestingForSimilarity_thenJudgeThemToBeDissimilar() {
-        String a = "Johnson";
-        String b = "Daghtsen";
-        System.out.println(sut.editDistanceIgnoreCase(a,b));
-        assertFalse(sut.isSimilar(a,b));
     }
 
 }
