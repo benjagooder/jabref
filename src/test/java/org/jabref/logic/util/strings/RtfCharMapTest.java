@@ -1,9 +1,11 @@
 package org.jabref.logic.util.strings;
 
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 
 public class RtfCharMapTest {
 
@@ -24,7 +26,7 @@ public class RtfCharMapTest {
     @Test
     public void givenIncorrectInput_whenGetMethod_thenReturnNull() {
         String key = "`b";
-        assertTrue(sut.get(key) == null);
+        assertNull(sut.get(key));
     }
 
 }
