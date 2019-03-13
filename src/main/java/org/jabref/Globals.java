@@ -30,7 +30,7 @@ import com.microsoft.applicationinsights.telemetry.SessionState;
 
 public class Globals {
 
-    // JabRef version info
+    // JabRef version information
     public static final BuildInfo BUILD_INFO = new BuildInfo();
     // Remote listener
     public static final RemoteListenerServerLifecycle REMOTE_LISTENER = new RemoteListenerServerLifecycle();
