@@ -43,26 +43,20 @@ jobs:
           path: build/releases
           destination: build
 
-  buildRelease:
+  testCoverage:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
-      - restore_cache:
-          key: dependency-cache
-      - checkout
-      - run: git submodule sync
-      - run: git submodule update --init
-      - restore_cache:
-          key: install4j-{{ checksum "scripts/extract-install4j.sh" }}
-      - run: scripts/extract-install4j.sh
-      - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
-      - run: ./gradlew -Pinstall4jDir="install4j7" release --stacktrace
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/test-results
       - store_artifacts:
-          path: build/releases
-          destination: release
-    filters:
-      tags:
-        only: /.*/
+          path: ~/test-results/junit
 
 workflows:
   version: 2
@@ -72,7 +66,7 @@ workflows:
       - buildDev:
           requires:
             - downloadinstall4j
-      - buildRelease:
+      - testCoverage:
           requires:
             - downloadinstall4j
           filters:
@@ -80,4 +74,5 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
+
 

@@ -38,7 +38,7 @@ public class DuplicateCheck {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DuplicateCheck.class);
     /*
-     * Integer values for indicating result of duplicate check (for entries):
+     * Integer values for indicating result of duplicate check (for entries): 
      */
     private static final int NOT_EQUAL = 0;
     private static final int EQUAL = 1;
