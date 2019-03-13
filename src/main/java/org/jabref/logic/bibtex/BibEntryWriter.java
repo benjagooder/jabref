@@ -194,7 +194,6 @@ public class BibEntryWriter {
             // hard coded "UNKNOWN" is assigned to a field without any name
             actualField = "UNKNOWN";
         }
-
         return actualField.toLowerCase(Locale.ROOT) + StringUtil.repeatSpaces(intendation - actualField.length()) + " = ";
     }
 }
