@@ -25,9 +25,8 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
-      - run: |
-        mkdir -p ~/test-results/junit/
-        find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+      - run: mkdir -p ~/test-results/junit/
+      - run: find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
       - store_test_results:
           path: ~/test-results
       - store_artifacts:
