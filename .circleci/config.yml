@@ -35,6 +35,12 @@ jobs:
       - run: scripts/extract-install4j.sh
       - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
       - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" releaseJar --stacktrace
+      - run: mkdir -p ~/test-results/junit/
+      - run: find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+      - store_test_results:
+          path: ~/test-results
+      - store_artifacts:
+          path: ~/test-results/junit
       - save_cache:
           key: dependency-cache
           paths:
