@@ -21,6 +21,21 @@ jobs:
       tags:
         only: /.*/
 
+  testCoverage:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/test-results
+      - store_artifacts:
+          path: ~/test-results/junit
+
   buildDev:
     docker:
       - image: circleci/openjdk:8-jdk
@@ -43,30 +58,15 @@ jobs:
           path: build/releases
           destination: build
 
-  testCoverage:
-    docker:
-      - image: circleci/openjdk:8-jdk
-    steps:
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p ~/test-results/junit/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
-          when: always
-      - store_test_results:
-          path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results/junit
-
 workflows:
   version: 2
   build:
     jobs:
       - downloadinstall4j
-      - buildDev:
+      - testCoverage:
           requires:
             - downloadinstall4j
-      - testCoverage:
+      - buildDev:
           requires:
             - downloadinstall4j
           filters:
