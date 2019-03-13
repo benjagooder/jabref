@@ -21,17 +21,6 @@ jobs:
       tags:
         only: /.*/
 
-  testCoverage:
-    docker:
-      - image: circleci/openjdk:8-jdk
-    steps:
-      - run: mkdir -p ~/test-results/junit/
-      - run: find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
-      - store_test_results:
-          path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results/junit
-
   buildDev:
     docker:
       - image: circleci/openjdk:8-jdk
@@ -54,15 +43,36 @@ jobs:
           path: build/releases
           destination: build
 
+  buildRelease:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - restore_cache:
+          key: dependency-cache
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
+      - restore_cache:
+          key: install4j-{{ checksum "scripts/extract-install4j.sh" }}
+      - run: scripts/extract-install4j.sh
+      - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
+      - run: ./gradlew -Pinstall4jDir="install4j7" release --stacktrace
+      - store_artifacts:
+          path: build/releases
+          destination: release
+    filters:
+      tags:
+        only: /.*/
+
 workflows:
   version: 2
   build:
     jobs:
       - downloadinstall4j
-      - testCoverage:
+      - buildDev:
           requires:
             - downloadinstall4j
-      - buildDev:
+      - buildRelease:
           requires:
             - downloadinstall4j
           filters:
@@ -70,5 +80,4 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
-
 
