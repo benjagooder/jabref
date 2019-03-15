@@ -58,6 +58,7 @@ jobs:
       tags:
         only: /.*/
 
+
   test:
     docker:
       - image: circleci/openjdk:8-jdk
@@ -71,7 +72,7 @@ jobs:
           key: install4j-{{ checksum "scripts/extract-install4j.sh" }}
       - run: scripts/extract-install4j.sh
       - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
-      - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" build --stop --stacktrace
+      - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" build --no-daemon --stacktrace
           no_output_timeout: 1200
       - run:
           name: Save test results
