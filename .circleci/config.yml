@@ -58,7 +58,7 @@ jobs:
       tags:
         only: /.*/
 
-  buildDev:
+  test:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
@@ -88,9 +88,4 @@ workflows:
   build:
     jobs:
       - buildDev
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.*/
-
+      - test
