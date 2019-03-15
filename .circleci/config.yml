@@ -17,14 +17,6 @@ jobs:
           paths:
             - "~/downloads"
             - "~/.install4j7"
-    filters:
-      tags:
-        only: /.*/
-
-  buildDev:
-    docker:
-      - image: circleci/openjdk:8-jdk
-    steps:
       - restore_cache:
           key: dependency-cache
       - checkout
@@ -42,8 +34,11 @@ jobs:
       - store_artifacts:
           path: build/releases
           destination: build
+    filters:
+      tags:
+        only: /.*/
 
-  buildRelease:
+  buildDev:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
@@ -56,13 +51,17 @@ jobs:
           key: install4j-{{ checksum "scripts/extract-install4j.sh" }}
       - run: scripts/extract-install4j.sh
       - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
-      - run: ./gradlew -Pinstall4jDir="install4j7" release --stacktrace
-      - store_artifacts:
-          path: build/releases
-          destination: release
-    filters:
-      tags:
-        only: /.*/
+      - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" build --stacktrace
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+            - store_test_results:
+                path: ~/test-results
+            - store_artifacts:
+                path: ~/test-results/junit
 
 workflows:
   version: 2
@@ -70,9 +69,6 @@ workflows:
     jobs:
       - downloadinstall4j
       - buildDev:
-          requires:
-            - downloadinstall4j
-      - buildRelease:
           requires:
             - downloadinstall4j
           filters:
