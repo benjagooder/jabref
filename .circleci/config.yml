@@ -42,7 +42,7 @@ jobs:
             find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
           when: always
       - store_test_results:
-          path: ~/test-results/test
+          path: ~/test-results
       - save_cache:
           key: dependency-cache
           paths:
