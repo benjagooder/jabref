@@ -5,35 +5,12 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
-      - checkout
-      - run: git submodule sync
-      - run: git submodule update --init
-      - restore_cache:
-          keys:
-            - install4j-{{ checksum "scripts/extract-install4j.sh" }}
-      - run: scripts/download-install4j-and-jres.sh
-      - save_cache:
-          key: install4j-{{ checksum "scripts/extract-install4j.sh" }}
-          paths:
-            - "~/downloads"
-            - "~/.install4j7"
-      - restore_cache:
-          key: dependency-cache
-      - checkout
-      - run: git submodule sync
-      - run: git submodule update --init
-      - restore_cache:
-          key: install4j-{{ checksum "scripts/extract-install4j.sh" }}
-      - run: scripts/extract-install4j.sh
-      - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
-      - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" test --stacktrace
+      - run: ./gradlew assemble
+      - run: ./gradlew build
+      - run: ./gradlew test
       - store_artifacts:
           path: target
           destination: build
-      - save_cache:
-          key: dependency-cache
-          paths:
-            - "~/.gradle"
 
 workflows:
   version: 2
