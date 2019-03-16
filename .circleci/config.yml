@@ -35,6 +35,8 @@ jobs:
       - run: scripts/extract-install4j.sh
       - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
       - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" releaseJar --stacktrace
+      - store_test_results:
+          path: test
       - save_cache:
           key: dependency-cache
           paths:
