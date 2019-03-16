@@ -511,6 +511,22 @@ task releaseJar(dependsOn: "shadowJar") {
     }
 }
 
+task gomlTestCoverage(dependsOn: "shadowJar") {
+    group = 'JabRef - Release'
+    description "Creates a Jar release."
+    doLast {
+        copy {
+            from("$buildDir/libs/JabRef-${project.version}-fat.jar")
+            into("$buildDir/releases")
+            rename { String fileName ->
+                fileName.replace('-fat', '')
+            }
+        }
+        // set executable with read permissions (first true) and for all (false)
+        file("$buildDir/releases/JabRef-${project.version}.jar").setExecutable(true, false)
+    }
+}
+
 task snapJar(dependsOn: "releaseJar", type: Delete) {
     delete fileTree(dir: "$buildDir/releases/", exclude: "JabRef-${project.version}.jar")
 }
