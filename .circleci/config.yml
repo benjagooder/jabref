@@ -40,8 +40,7 @@ jobs:
           paths:
             - "~/.gradle"
       - store_artifacts:
-          path: build/releases
-          destination: build
+          path: target
 
   buildRelease:
     docker:
