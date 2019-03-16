@@ -26,67 +26,17 @@ jobs:
           key: install4j-{{ checksum "scripts/extract-install4j.sh" }}
       - run: scripts/extract-install4j.sh
       - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
-      - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" releaseJar --stacktrace
+      - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" test --stacktrace
+      - store_artifacts:
+          path: target
+          destination: build
       - save_cache:
           key: dependency-cache
           paths:
             - "~/.gradle"
-      - store_artifacts:
-          path: build/releases
-          destination: build
-      - restore_cache:
-          key: dependency-cache
-      - checkout
-      - run: git submodule sync
-      - run: git submodule update --init
-      - restore_cache:
-          key: install4j-{{ checksum "scripts/extract-install4j.sh" }}
-      - run: scripts/extract-install4j.sh
-      - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
-      - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" releaseJar --stacktrace
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p ~/test-results/junit/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
-          when: always
-      - store_test_results:
-          path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results/junit
-    filters:
-      tags:
-        only: /.*/
-
-
-  test:
-    docker:
-      - image: circleci/openjdk:8-jdk
-    steps:
-      - restore_cache:
-          key: dependency-cache
-      - checkout
-      - run: git submodule sync
-      - run: git submodule update --init
-      - restore_cache:
-          key: install4j-{{ checksum "scripts/extract-install4j.sh" }}
-      - run: scripts/extract-install4j.sh
-      - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
-      - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" build --stacktrace
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p ~/test-results/junit/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
-          when: always
-      - store_test_results:
-          path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results/junit
 
 workflows:
   version: 2
   build:
     jobs:
       - buildDev
-      - test
