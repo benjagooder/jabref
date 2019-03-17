@@ -489,7 +489,6 @@ task media(type: com.install4j.gradle.Install4jTask, dependsOn: ["releaseJar", "
     }
 }
 
-
 task release(dependsOn: ["media", "releaseJar"]) {
     group = 'JabRef - Release'
     description 'Creates a release for all target platforms.'

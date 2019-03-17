@@ -40,7 +40,7 @@ jobs:
       - run: scripts/extract-install4j.sh
       - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
       - run:
-          command: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" jacocoTestReport --max-workers=2
+          command: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" gomlTestCoverage --max-workers=2
       - save_cache:
           key: dependency-cache
           paths:
