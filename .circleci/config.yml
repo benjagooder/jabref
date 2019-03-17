@@ -48,8 +48,8 @@ jobs:
           paths:
             - "~/.gradle"
       - store_artifacts:
-          path: build/releases
-          destination: build
+          path: /home/circleci/test-results
+          destination: test-results
 
   buildRelease:
     docker:
