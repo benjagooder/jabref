@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 
 class JabRefPreferencesTest {
 
-  //  private JabRefPreferences prefs;
+    private JabRefPreferences prefs;
 
     @BeforeEach
     void setUp() {
