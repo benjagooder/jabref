@@ -39,7 +39,7 @@ jobs:
           key: install4j-{{ checksum "scripts/extract-install4j.sh" }}
       - run: scripts/extract-install4j.sh
       - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
-      - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" releaseJar --stacktrace
+      - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" jacocoTestReport --stacktrace
       - run:
           name: Save test results
           command: |
