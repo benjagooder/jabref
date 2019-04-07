@@ -17,39 +17,52 @@ class StyleTest {
     }
 
     @Test
-    void setColor() {
-
+    void givenTomCruiseFace_whenSetFace_thenGetTomCruiseFace() {
+        String newFace = "Tom Cruise";
+        sut.setFace(newFace);
+        String sutFace = sut.getFace();
+        assertEquals(newFace, sutFace);
     }
 
     @Test
-    void getFace() {
+    void givenNullFace_whenSetFace_thenGetNormal() {
+        String nullFace = null;
+        sut.setFace(nullFace);
+        String sutFace = sut.getFace();
+        String testString = "normal";
+        assertEquals(testString, sutFace);
     }
 
     @Test
-    void setFace() {
+    void givenHelveticaFont_whenSetFont_thenGetHelvetica() {
+        String newFont = "helvetica";
+        sut.setFont(newFont);
+        String sutFont = sut.getFont();
+        assertEquals(newFont, sutFont);
     }
 
     @Test
-    void getFont() {
+    void givenNullFont_whenSetFont_thenGetDefault() {
+        String nullFont = null;
+        sut.setFont(nullFont);
+        String sutFont = sut.getFont();
+        String testFont = "default";
+        assertEquals(testFont, sutFont);
     }
 
     @Test
-    void setFont() {
+    void givenBigSize_whenSetSize_thenGetBig() {
+        String newSize = "big";
+        sut.setSize(newSize);
+        String sutSize = sut.getSize();
+        assertEquals(newSize, sutSize);
     }
 
     @Test
-    void getSize() {
-    }
-
-    @Test
-    void setSize() {
-    }
-
-    @Test
-    void getvalue() {
-    }
-
-    @Test
-    void setvalue() {
+    void givenSupremeValue_whenSetValue_thenGetSupreme() {
+        String newValue = "supreme";
+        sut.setvalue(newValue);
+        String sutValue = sut.getvalue();
+        assertEquals(newValue, sutValue);
     }
 }
