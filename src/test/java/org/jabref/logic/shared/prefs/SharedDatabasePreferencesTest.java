@@ -10,6 +10,15 @@ public class SharedDatabasePreferencesTest {
         SharedDatabasePreferences sut = new SharedDatabasePreferences();
         sut.setName("Donaldson");
         String result = sut.getName().toString();
-        assertEquals(result, "Optional[Donaldson]");
+        assertEquals("Optional[Donaldson]", result);
     }
+
+    @Test
+    public void givenUser_whenGetUserMethod_thenCorrectUserResults() {
+        SharedDatabasePreferences sut = new SharedDatabasePreferences();
+        sut.setUser("Benjamin");
+        String result = sut.getUser().toString();
+        assertEquals("Optional[Benjamin]", result);
+    }
+
 }
