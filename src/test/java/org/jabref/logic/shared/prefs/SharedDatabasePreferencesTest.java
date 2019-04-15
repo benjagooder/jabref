@@ -12,7 +12,7 @@ public class SharedDatabasePreferencesTest {
         String result = sut.getName().toString();
         assertEquals("Optional[Donaldson]", result);
     }
-
+// Trivial change
     @Test
     public void givenUser_whenGetUserMethod_thenReturnCorrectUserResults() {
         SharedDatabasePreferences sut = new SharedDatabasePreferences();
