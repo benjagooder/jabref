@@ -18,6 +18,7 @@ public class MetaDataTest {
     }
 
 
+
     @Test
     public void emptyGroupsIfNotSet() {
         assertEquals(Optional.empty(), metaData.getGroups());
