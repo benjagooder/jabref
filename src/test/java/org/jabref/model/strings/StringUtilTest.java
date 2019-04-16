@@ -147,10 +147,9 @@ class StringUtilTest {
 
     @Test
     void testGetPart() {
-        assertEquals("",StringUtil.getPart("", 0, false));
+        assertEquals("", StringUtil.getPart("", 0, false));
         assertEquals("a", StringUtil.getPart("{a}", 0, false));
-        assertEquals("{a}", StringUtil.getPart("   {a}", 0, true));
-        assertEquals("a", StringUtil.getPart(" a ", 0, false));
+        assertEquals("{a}", StringUtil.getPart(" {a}", 0, true));
     }
 
     @Test
