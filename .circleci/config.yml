@@ -42,6 +42,8 @@ jobs:
       - store_artifacts:
           path: build/releases
           destination: build
+      - store_test_results:
+          path: test-results
 
   buildRelease:
     docker:
@@ -60,8 +62,6 @@ jobs:
       - store_artifacts:
           path: build/releases
           destination: release
-      - store_test_results:
-          path: test-results
     filters:
       tags:
         only: /.*/
