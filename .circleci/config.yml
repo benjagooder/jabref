@@ -60,6 +60,8 @@ jobs:
       - store_artifacts:
           path: build/releases
           destination: release
+      - store_test_results:
+          path: test-results
     filters:
       tags:
         only: /.*/
