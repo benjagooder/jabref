@@ -42,19 +42,7 @@ jobs:
       - store_artifacts:
           path: build/releases
           destination: build
-      - store_test_results:
-          path: src/test-results
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p src/test-results/junit/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
-          when: always
-      - store_test_results:
-          path: src/test-results
-      - store_artifacts:
-          path: src/test-results/junit
-
+          
   buildRelease:
     docker:
       - image: circleci/openjdk:8-jdk
