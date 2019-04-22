@@ -42,6 +42,9 @@ jobs:
       - store_artifacts:
           path: build/releases
           destination: build
+      - store_artifacts:
+          path: test-results.xml
+          prefix: tests
 
   buildRelease:
     docker:
