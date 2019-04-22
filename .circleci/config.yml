@@ -1,5 +1,4 @@
 version: 2
-
 jobs:
   downloadinstall4j:
     docker:
@@ -15,12 +14,11 @@ jobs:
       - save_cache:
           key: install4j-{{ checksum "scripts/extract-install4j.sh" }}
           paths:
-            - "~/downloads"
-            - "~/.install4j7"
+            - ~/downloads
+            - ~/.install4j7
     filters:
       tags:
         only: /.*/
-
   buildDev:
     docker:
       - image: circleci/openjdk:8-jdk
@@ -35,17 +33,15 @@ jobs:
       - run: scripts/extract-install4j.sh
       - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
       - run: ./gradlew -Pdev=true -Pinstall4jDir="install4j7" releaseJar --stacktrace
-      - run:  mkdir -p ~/test-results/junit/
-      - run:  find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
-      - store_test_results:
-          path: ~/test-results
+      - save_cache:
+          key: dependency-cache
+          paths:
+            - ~/.gradle
       - store_artifacts:
-          path: ~/test-results/junit
-
-
-
-
-
+          path: build/releases
+          destination: build
+      - store_test_results:
+          path: src/test-results
   buildRelease:
     docker:
       - image: circleci/openjdk:8-jdk
@@ -66,7 +62,6 @@ jobs:
     filters:
       tags:
         only: /.*/
-
 workflows:
   version: 2
   build:
@@ -83,4 +78,3 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
-
