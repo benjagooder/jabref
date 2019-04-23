@@ -1,6 +1,7 @@
 package org.jabref.logic.shared.prefs;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.Assert.assertEquals;
 
 public class SharedDatabasePreferencesTest {

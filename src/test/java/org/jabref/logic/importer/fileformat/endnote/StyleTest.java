@@ -2,7 +2,7 @@ package org.jabref.logic.importer.fileformat.endnote;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StyleTest {
 

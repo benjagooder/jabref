@@ -1,13 +1,14 @@
 package org.jabref.logic.shared.security;
 
-import org.junit.Test;
-
-import javax.crypto.NoSuchPaddingException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
 
-import static org.junit.Assert.*;
+import javax.crypto.NoSuchPaddingException;
+
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PasswordTest {
 

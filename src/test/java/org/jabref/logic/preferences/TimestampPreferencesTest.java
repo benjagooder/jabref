@@ -1,11 +1,8 @@
 package org.jabref.logic.preferences;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Time;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TimestampPreferencesTest {
 
