@@ -39,7 +39,10 @@ jobs:
           key: dependency-cache
           paths:
             - "~/.gradle"
-      - run: %cd% >foo.txt
+      - run: cd src
+      - run: cd test
+      - run: cd resources
+      - run: cp log4j2-test.xml >foo.txt
       - store_artifacts:
           path: foo.txt
           destination: foo.txt
