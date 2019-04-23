@@ -25,6 +25,10 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
+      - checkout
+      - run: mvn test
+      - store_artifacts:
+          path:  target
       - restore_cache:
           key: dependency-cache
       - checkout
@@ -44,16 +48,15 @@ jobs:
           destination: build
       - store_test_results:
           path: src/test
-      steps:
-        - checkout
-        - run: mvn test
-        - store_artifacts:
-            path:  target
 
   buildRelease:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
+        - checkout
+        - run: mvn test
+        - store_artifacts:
+            path:  target
       - restore_cache:
           key: dependency-cache
       - checkout
@@ -70,11 +73,6 @@ jobs:
     filters:
       tags:
         only: /.*/
-        steps:
-          - checkout
-          - run: mvn test
-          - store_artifacts:
-              path:  target
 
 workflows:
   version: 2
