@@ -44,6 +44,11 @@ jobs:
           destination: build
       - store_test_results:
           path: src/test
+      steps:
+        - checkout
+        - run: mvn test
+        - store_artifacts:
+            path:  target
 
   buildRelease:
     docker:
@@ -65,17 +70,15 @@ jobs:
     filters:
       tags:
         only: /.*/
+        steps:
+          - checkout
+          - run: mvn test
+          - store_artifacts:
+              path:  target
 
 workflows:
   version: 2
   build:
-    docker:
-      - image: circleci/openjdk:8.0-stretch-node-browsers-legacy
-      steps:
-        - checkout
-        - run: mvn test
-        - store_artifacts:
-            path:  target
     jobs:
       - downloadinstall4j
       - buildDev:
