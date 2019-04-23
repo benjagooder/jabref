@@ -40,10 +40,11 @@ jobs:
           paths:
             - "~/.gradle"
       - store_artifacts:
-          path: build/test-results
-          destination: build/test-results
+          path: build/releases
+          destination: build
       - store_test_results:
-          path: src/test-results
+          path: build/test-results
+          destination: build
 
   buildRelease:
     docker:
@@ -61,6 +62,9 @@ jobs:
       - run: ./gradlew -Pinstall4jDir="install4j7" release --stacktrace
       - store_artifacts:
           path: build/releases
+          destination: release
+      - store_test_results:
+          path: build/test-results
           destination: release
     filters:
       tags:
