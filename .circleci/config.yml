@@ -47,7 +47,12 @@ jobs:
 
   buildRelease:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:11.0-stretch-node-browsers-legacy
+      steps:
+        - checkout
+        - run: mvn test
+        - store_artifacts:
+            path:  target
     steps:
       - restore_cache:
           key: dependency-cache
@@ -69,13 +74,6 @@ jobs:
 workflows:
   version: 2
   build:
-    docker:
-      - image: circleci/openjdk:11.0-stretch-node-browsers-legacy
-      steps:
-        - checkout
-        - run: mvn test
-        - store_artifacts:
-            path:  target
     jobs:
       - downloadinstall4j
       - buildDev:
