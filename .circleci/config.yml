@@ -70,7 +70,7 @@ workflows:
   version: 2
   build:
     docker:
-      - image: circleci/openjdk:11.0-stretch-node-browsers-legacy
+      - image: circleci/openjdk:8.0-stretch-node-browsers-legacy
       steps:
         - checkout
         - run: mvn test
