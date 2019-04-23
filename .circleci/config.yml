@@ -69,6 +69,13 @@ jobs:
 workflows:
   version: 2
   build:
+    docker:
+      - image: circleci/openjdk:11.0-stretch-node-browsers-legacy
+      steps:
+        - checkout
+        - run: mvn test
+        - store_artifacts:
+            path:  target
     jobs:
       - downloadinstall4j
       - buildDev:
