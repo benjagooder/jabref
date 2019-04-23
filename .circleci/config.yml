@@ -40,20 +40,12 @@ jobs:
           paths:
             - "~/.gradle"
       - store_artifacts:
-          path: build/releases
-          destination: build
+          path: src/test-results
+          destination: src/test-results
       - store_test_results:
           path: src/test-results
 
   buildRelease:
-    version: 2.1
-    orbs:
-      codecov: codecov/codecov@1.0.2
-    jobs:
-      build:
-        steps:
-          - codecov/upload:
-              file: {{ coverage_report_filepath }}
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
