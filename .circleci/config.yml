@@ -43,9 +43,6 @@ jobs:
           key: dependency-cache
           paths:
             - "~/.gradle"
-      - store_artifacts:
-          path: build/releases
-          destination: build
       - store_test_results:
           path: src/test
 
@@ -67,9 +64,6 @@ jobs:
       - run: scripts/extract-install4j.sh
       - run: install4j7/bin/install4jc --verbose --license=$INSTALL4J_KEY
       - run: ./gradlew -Pinstall4jDir="install4j7" release --stacktrace
-      - store_artifacts:
-          path: build/releases
-          destination: release
     filters:
       tags:
         only: /.*/
