@@ -43,7 +43,7 @@ jobs:
           path: build/releases
           destination: build
       - store_test_results:
-          path: build/test-results
+          path: src/test-results
           destination: build
 
   buildRelease:
@@ -64,7 +64,7 @@ jobs:
           path: build/releases
           destination: release
       - store_test_results:
-          path: build/test-results
+          path: src/test-results
           destination: release
     filters:
       tags:
