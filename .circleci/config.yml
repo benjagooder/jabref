@@ -46,13 +46,16 @@ jobs:
           path: src/test-results
 
   buildRelease:
+    version: 2.1
+    orbs:
+      codecov: codecov/codecov@1.0.2
+    jobs:
+      build:
+        steps:
+          - codecov/upload:
+              file: {{ coverage_report_filepath }}
     docker:
-      - image: circleci/openjdk:11.0-stretch-node-browsers-legacy
-      steps:
-        - checkout
-        - run: mvn test
-        - store_artifacts:
-            path:  target
+      - image: circleci/openjdk:8-jdk
     steps:
       - restore_cache:
           key: dependency-cache
