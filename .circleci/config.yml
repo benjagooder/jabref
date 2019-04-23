@@ -44,16 +44,6 @@ jobs:
           destination: build
       - store_test_results:
           path: src/test-results
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p src/test-results/junit/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
-          when: always
-      - store_test_results:
-          path: src/test-results
-      - store_artifacts:
-          path: src/test-results/junit
 
   buildRelease:
     docker:
@@ -79,6 +69,13 @@ jobs:
 workflows:
   version: 2
   build:
+    docker:
+      - image: circleci/openjdk:11.0-stretch-node-browsers-legacy
+      steps:
+        - checkout
+        - run: mvn test
+        - store_artifacts:
+            path:  target
     jobs:
       - downloadinstall4j
       - buildDev:
