@@ -1,6 +1,8 @@
 coverage:
   ignore:
   - src/gen/.*
+  codecov:
+    token: cb2f188d-c26d-416c-b97d-842ff50ffc2b
   status:
     patch: false
 comment: off

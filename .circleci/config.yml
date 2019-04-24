@@ -8,6 +8,7 @@ jobs:
       - checkout
       - run: git submodule sync
       - run: git submodule update --init
+      -
       - restore_cache:
           keys:
             - install4j-{{ checksum "scripts/extract-install4j.sh" }}
@@ -40,10 +41,13 @@ jobs:
           paths:
             - "~/.gradle"
       - run: cd src
-      - run: cp hello.txt foo.txt
+      - run: cp hello.txt >foo.txt
       - store_artifacts:
           path: foo.txt
           destination: foo.txt
+      - store_artifacts:
+          path: hello.txt
+          destination: hello.txt
 
 
   buildRelease:
