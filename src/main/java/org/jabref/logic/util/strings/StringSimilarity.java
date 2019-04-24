@@ -8,7 +8,7 @@ public class StringSimilarity {
     private final Levenshtein METRIC_DISTANCE = new Levenshtein();
     // edit distance threshold for entry title comparison
     private final int METRIC_THRESHOLD = 4;
-
+ 
     /**
      * String similarity based on Levenshtein, ignoreCase, and fixed metric threshold of 4.
      *
