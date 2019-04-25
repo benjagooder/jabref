@@ -339,6 +339,9 @@ public class BasePanel extends StackPane {
         // The action for copying the BibTeX key and the title for the first selected entry
         actions.put(Actions.COPY_KEY_AND_TITLE, this::copyKeyAndTitle);
 
+        //The action for copying the BibTeX citation for the first selected entry
+        actions.put(Actions.COPY_CITATION, this::copyCitation);
+
         actions.put(Actions.COPY_CITATION_ASCII_DOC, () -> copyCitationToClipboard(CitationStyleOutputFormat.ASCII_DOC));
         actions.put(Actions.COPY_CITATION_XSLFO, () -> copyCitationToClipboard(CitationStyleOutputFormat.XSL_FO));
         actions.put(Actions.COPY_CITATION_HTML, () -> copyCitationToClipboard(CitationStyleOutputFormat.HTML));
@@ -489,6 +492,24 @@ public class BasePanel extends StackPane {
 
     public void delete(BibEntry entry) {
         delete(false, Collections.singletonList(entry));
+    }
+
+    private void copyCitation() {
+        List<BibEntry> selectedBibEntries = mainTable.getSelectedEntries();
+        if (!selectedBibEntries.isEmpty()) {
+            // Collect all non-null titles.
+            List<String> citations = selectedBibEntries.stream()
+                    .map(bibEntry -> bibEntry.getCitation(250))
+                    .collect(Collectors.toList());
+
+            if (citations.isEmpty()) {
+                output(Localization.lang("None of the selected entries have citations."));
+                return;
+            }
+            Globals.clipboardManager.setContent(String.join("\n", citations));
+
+            output((selectedBibEntries.size() > 1 ? Localization.lang("Copied citations") : Localization.lang("Copied citations")) + '.');
+        }
     }
 
     private void copyTitle() {

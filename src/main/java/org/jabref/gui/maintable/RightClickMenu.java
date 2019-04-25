@@ -149,6 +149,7 @@ public class RightClickMenu {
         copySpecialMenu.getItems().add(factory.createMenuItem(StandardActions.COPY_CITE_KEY, new OldCommandWrapper(Actions.COPY_CITE_KEY, panel)));
         copySpecialMenu.getItems().add(factory.createMenuItem(StandardActions.COPY_KEY_AND_TITLE, new OldCommandWrapper(Actions.COPY_KEY_AND_TITLE, panel)));
         copySpecialMenu.getItems().add(factory.createMenuItem(StandardActions.COPY_KEY_AND_LINK, new OldCommandWrapper(Actions.COPY_KEY_AND_LINK, panel)));
+        copySpecialMenu.getItems().add(factory.createMenuItem(StandardActions.COPY_CITATION, new OldCommandWrapper(Actions.COPY_CITATION, panel)));
 
         // the submenu will behave dependent on what style is currently selected (citation/preview)
         PreviewPreferences previewPreferences = Globals.prefs.getPreviewPreferences();
