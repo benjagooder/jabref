@@ -312,15 +312,19 @@ public class LinkedFileViewModel extends AbstractViewModel {
     }
 
     public void edit() {
+        //trying to fix error when trying to edit file that is not downloaded
+        Optional<Path> downloadedFile = linkedFile.findIn(databaseContext, filePreferences);
+        if(downloadedFile.isPresent()) {
 
-        LinkedFileEditDialogView dialog = new LinkedFileEditDialogView(this.linkedFile);
+            LinkedFileEditDialogView dialog = new LinkedFileEditDialogView(this.linkedFile);
 
-        Optional<LinkedFile> editedFile = dialog.showAndWait();
-        editedFile.ifPresent(file -> {
-            this.linkedFile.setLink(file.getLink());
-            this.linkedFile.setDescription(file.getDescription());
-            this.linkedFile.setFileType(file.getFileType());
-        });
+            Optional<LinkedFile> editedFile = dialog.showAndWait();
+            editedFile.ifPresent(file -> {
+                this.linkedFile.setLink(file.getLink());
+                this.linkedFile.setDescription(file.getDescription());
+                this.linkedFile.setFileType(file.getFileType());
+            });
+        }
     }
 
     public void writeXMPMetadata() {
