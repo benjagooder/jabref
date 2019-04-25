@@ -16,6 +16,7 @@ public enum StandardActions implements Action {
     COPY_CITE_KEY(Localization.lang("Copy \\cite{BibTeX key}"), KeyBinding.COPY_CITE_BIBTEX_KEY),
     COPY_KEY_AND_TITLE(Localization.lang("Copy BibTeX key and title"), KeyBinding.COPY_BIBTEX_KEY_AND_TITLE),
     COPY_KEY_AND_LINK(Localization.lang("Copy BibTeX key and link"), KeyBinding.COPY_BIBTEX_KEY_AND_LINK),
+    COPY_CITATION(Localization.lang("Copy citation"), KeyBinding.COPY_CITATION),
     COPY_CITATION_HTML(Localization.lang("Copy citation") + " (HTML)", KeyBinding.COPY_PREVIEW),
     COPY_CITATION_MORE(Localization.lang("Copy citation") + "..."),
     COPY_CITATION_TEXT("Text"),

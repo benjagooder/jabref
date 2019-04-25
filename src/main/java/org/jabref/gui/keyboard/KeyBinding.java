@@ -19,6 +19,7 @@ public enum KeyBinding {
     COPY_BIBTEX_KEY("Copy BibTeX key", Localization.lang("Copy BibTeX key"), "ctrl+shift+K", KeyBindingCategory.EDIT),
     COPY_BIBTEX_KEY_AND_TITLE("Copy BibTeX key and title", Localization.lang("Copy BibTeX key and title"), "ctrl+shift+alt+K", KeyBindingCategory.EDIT),
     COPY_BIBTEX_KEY_AND_LINK("Copy BibTeX key and link", Localization.lang("Copy BibTeX key and link"), "ctrl+alt+K", KeyBindingCategory.EDIT),
+    COPY_CITATION("Copy citation", Localization.lang("Copy citation"), "ctrl+shift+alt+T", KeyBindingCategory.EDIT),
     COPY_PREVIEW("Copy preview", Localization.lang("Copy preview"), "ctrl+shift+C", KeyBindingCategory.VIEW),
     CUT("Cut", Localization.lang("Cut"), "ctrl+X", KeyBindingCategory.EDIT),
     //We have to put Entry Editor Previous before, because otherwise the decrease font size is found first

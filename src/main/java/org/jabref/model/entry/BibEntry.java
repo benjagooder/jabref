@@ -583,6 +583,23 @@ public class BibEntry implements Cloneable {
     }
 
     /**
+     * @param maxCharacters The maximum number of characters (additional
+     *                      characters are replaced with "..."). Set to 0 to disable truncation.
+     * @return A short textual description of the entry in the format:
+     * Author1: Title (Year)
+     */
+    public String getCitation(int maxCharacters) {
+        String[] s = new String[] {getField(FieldName.AUTHOR).orElse("N/A"), getField(FieldName.TITLE).orElse("N/A"),
+                getField(FieldName.YEAR).orElse("N/A")};
+
+        String text = s[0] + ": \"" + s[1] + "\" (" + s[2] + ')';
+        if ((maxCharacters <= 0) || (text.length() <= maxCharacters)) {
+            return text;
+        }
+        return text.substring(0, maxCharacters + 1) + "...";
+    }
+
+    /**
      * Returns the title of the given BibTeX entry as an Optional.
      *
      * @return an Optional containing the title of a BibTeX entry in case it exists, otherwise return an empty Optional.
