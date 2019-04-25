@@ -312,7 +312,6 @@ public class LinkedFileViewModel extends AbstractViewModel {
     }
 
     public void edit() {
-        //trying to fix error when trying to edit file that is not downloaded
         Optional<Path> downloadedFile = linkedFile.findIn(databaseContext, filePreferences);
         if(downloadedFile.isPresent()) {
 
