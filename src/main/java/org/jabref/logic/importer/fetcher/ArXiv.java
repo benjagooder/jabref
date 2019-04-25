@@ -341,6 +341,7 @@ public class ArXiv implements FulltextFetcher, SearchBasedFetcher, IdBasedFetche
                     });
                 }
             }
+            //#4913 bug
             pdfUrl = pdfUrlParsed;
 
             // Associated DOI
