@@ -334,6 +334,7 @@ public class ArXiv implements FulltextFetcher, SearchBasedFetcher, IdBasedFetche
                 if (linkTitle.equals(Optional.of("pdf"))) {
                     pdfUrlParsed = XMLUtil.getAttributeContent(linkNode, "href").map(url -> {
                         try {
+                            //#4913 bug
                             return new URL(url);
                         } catch (MalformedURLException e) {
                             return null;
@@ -341,7 +342,6 @@ public class ArXiv implements FulltextFetcher, SearchBasedFetcher, IdBasedFetche
                     });
                 }
             }
-            //#4913 bug
             pdfUrl = pdfUrlParsed;
 
             // Associated DOI
