@@ -408,6 +408,7 @@ public class LinkedFileViewModel extends AbstractViewModel {
         }
     }
 
+    //#4913 bug might be from this recognizing it as a URL instead of a pdf
     private Optional<ExternalFileType> inferFileTypeFromURL(String url) {
         String extension = DownloadExternalFile.getSuffix(url);
         if (extension != null) {
