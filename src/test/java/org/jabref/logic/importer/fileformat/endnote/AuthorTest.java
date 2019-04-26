@@ -2,6 +2,7 @@ package org.jabref.logic.importer.fileformat.endnote;
 
 import org.junit.jupiter.api.Test;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AuthorTest {
