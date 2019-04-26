@@ -824,7 +824,7 @@ public class BasePanel extends StackPane {
         AnchorPane.setLeftAnchor(pane, 0.0);
         AnchorPane.setRightAnchor(pane, 0.0);
         splitPane.getItems().add(anchorPane);
-        this.getChildren().setAll(splitPane);
+        DefaultTaskExecutor.runInJavaFXThread(() -> this.getChildren().setAll(splitPane));
 
         // Set up name autocompleter for search:
         instantiateSearchAutoCompleter();
