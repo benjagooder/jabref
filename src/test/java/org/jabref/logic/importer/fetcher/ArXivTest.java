@@ -65,7 +65,15 @@ public class ArXivTest {
 
         assertEquals(Optional.of(new URL("http://arxiv.org/pdf/cond-mat/0406246v1")), finder.findFullText(entry));
     }
+/*  Adding .pdf didn't solve the bug.
+    @Test
+    public void givenTestBibentry_whenfindFullText_thenFindFullTextByDOIWithPDFFileTypeSuffixAdded() throws IOException {
+        entry.setField(FieldName.DOI, "10.1529/biophysj.104.047340");
+        entry.setField(FieldName.TITLE, "Pause Point Spectra in DNA Constant-Force Unzipping");
 
+        assertEquals(Optional.of(new URL("http://arxiv.org/pdf/cond-mat/0406246v1.pdf")), finder.findFullText(entry));
+    }
+*/
     @Test
     public void findFullTextByEprint() throws IOException {
         entry.setField("eprint", "1603.06570");

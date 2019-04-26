@@ -334,6 +334,7 @@ public class ArXiv implements FulltextFetcher, SearchBasedFetcher, IdBasedFetche
                 if (linkTitle.equals(Optional.of("pdf"))) {
                     pdfUrlParsed = XMLUtil.getAttributeContent(linkNode, "href").map(url -> {
                         try {
+                            //#4913 bug: adding .pdf to URL did nothing; need to change the file name to not have .html
                             return new URL(url);
                         } catch (MalformedURLException e) {
                             return null;
